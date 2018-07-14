@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>weather in Python</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/grayscale.min.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Weather Python</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+          <h1 class="mx-auto my-0 text-uppercase">PyWeather</h1>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">Web dedicada a ofrecerte la prevision metereologica de tu zona</h2>
+          <a href="#about" class="btn btn-primary js-scroll-trigger">Obten el tiempo de tu zona</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-white mb-4">Realizado con Django y Bootstrap 4</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        {{ form.name }}
+                    </div>
+                        <button type="submit" class="btn btn-success">
+                            Add City
+                        </button>
+
+                </div>
+            </form>
+            <br><br>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+
+    <section class="projects-section">
+      <div class="container">
+          {% for city_weather in weather_data %}
+          <div class="text-center">
+              <div class="">
+                  <div class="">
+                      <article class="">
+                          <div class="">
+                              <figure class="">
+                                  <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                              </figure>
+                          </div>
+                          <div class="">
+                              <div class="">
+                                  <p>
+                                      <span class="h1">{{ city_weather.city }}</span>
+                                      <br>
+                                      <span class="h2">{{ city_weather.temperature }}° F</span>
+                                      <br> {{ city_weather.description }}
+                                  </p>
+                              </div>
+                          </div>
+                      </article>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+</section>
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{% static 'vendor/font-awesome/js/all.js' %}"></script>
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/grayscale.min.js' %}"></script>
+
+  </body>
+
+</html>
